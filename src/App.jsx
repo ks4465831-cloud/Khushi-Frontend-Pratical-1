@@ -2,54 +2,52 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [count, setCount] = useState(0);
+  const [step, setStep] = useState(1); // new: step control
 
-  // Load from localStorage (page refresh ke baad bhi data rahe)
   useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem("tasks"));
-    if (savedTasks) {
-      setTasks(savedTasks);
-    }
-  }, []);
-
-  // Save to localStorage whenever tasks change
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
-
-  const addTask = () => {
-    if (task.trim() === "") return;
-    setTasks([...tasks, task]);
-    setTask("");
-  };
-
-  const deleteTask = (index) => {
-    const updated = tasks.filter((_, i) => i !== index);
-    setTasks(updated);
-  };
+    document.title = `Count: ${count}`;
+  }, [count]);
 
   return (
     <div className="container">
-      <h1>To-Do App</h1>
+      <div className="card">
+        <h1>COUNTERS</h1>
 
-      <input
-        type="text"
-        placeholder="Enter task..."
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-      />
+        <h2 className="count">{count}</h2>
+        <p className="label">Current Value</p>
 
-      <button onClick={addTask}>Add</button>
+        {/* Step Input */}
+        <input
+          type="number"
+          value={step}
+          min="1"
+          onChange={(e) => setStep(Number(e.target.value))}
+          className="step-input"
+        />
 
-      <ul>
-        {tasks.map((t, i) => (
-          <li key={i}>
-            {t}
-            <button onClick={() => deleteTask(i)}>❌</button>
-          </li>
-        ))}
-      </ul>
+        <div className="btn-group">
+          <button
+            className="btn increase"
+            onClick={() => setCount((prev) => prev + step)}
+          >
+            + Increase
+          </button>
+
+          <button
+            className="btn decrease"
+            onClick={() =>
+              setCount((prev) => (prev - step < 0 ? 0 : prev - step))
+            }
+          >
+            − Decrease
+          </button>
+        </div>
+
+        <button className="reset" onClick={() => setCount(0)}>
+          Reset
+        </button>
+      </div>
     </div>
   );
 }
