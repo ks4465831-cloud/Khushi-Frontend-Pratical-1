@@ -1,19 +1,122 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+  color: white;
+}
+
+/* Main container */
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Card UI */
+.card {
+  background: #2f2f4f;
+  padding: 40px;
+  border-radius: 16px;
   text-align: center;
-  margin-top: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  width: 300px;
+  transition: transform 0.3s ease; /* new */
 }
 
-input {
-  padding: 10px;
-  width: 200px;
+/* Subtle hover lift */
+.card:hover {
+  transform: translateY(-5px);
 }
 
-button {
-  margin: 5px;
-  padding: 8px 12px;
+/* Title */
+.card h1 {
+  margin-bottom: 20px;
+  letter-spacing: 2px;
 }
 
-li {
-  list-style: none;
-  margin: 10px;
+/* Counter number */
+.count {
+  font-size: 3rem;
+  margin: 10px 0;
+  color: #00ffcc;
+  transition: transform 0.2s ease; /* new */
+}
+
+/* Slight pop effect when value changes */
+.count:active {
+  transform: scale(1.1);
+}
+
+/* Label text */
+.label {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+/* Button group */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Button click effect */
+.btn:active {
+  transform: scale(0.95);
+}
+
+/* Increase button */
+.increase {
+  background: #00c6ff;
+  color: white;
+}
+
+/* Decrease button */
+.decrease {
+  background: #ff4d4d;
+  color: white;
+}
+
+/* Reset button */
+.reset {
+  margin-top: 15px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #444;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Hover effects */
+.btn:hover,
+.reset:hover {
+  transform: scale(1.1);
+  opacity: 0.9; /* new */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 500px) {
+  .card {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .count {
+    font-size: 2.5rem;
+  }
 }
